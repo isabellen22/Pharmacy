@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FB48DBB6-80BA-4388-ABF6-D2CB57D1452E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Pharmacy</RootNamespace>
+    <AssemblyName>Pharmacy</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\ChemicalComponent.cs" />
+    <Compile Include="Classes\Class1.cs" />
+    <Compile Include="Classes\Client.cs" />
+    <Compile Include="Classes\ClientsTests.cs" />
+    <Compile Include="Classes\ConversionUnit.cs" />
+    <Compile Include="Classes\Country.cs" />
+    <Compile Include="Classes\Currency.cs" />
+    <Compile Include="Classes\Doctor.cs" />
+    <Compile Include="Classes\DoctorsSpecialization.cs" />
+    <Compile Include="Classes\employee\Employee.cs" />
+    <Compile Include="Classes\employee\EmployeeContract.cs" />
+    <Compile Include="Classes\employee\EmployeePromotion.cs" />
+    <Compile Include="Classes\employee\EmployeeSalary.cs" />
+    <Compile Include="Classes\employee\EmployeeSalaryHistory.cs" />
+    <Compile Include="Classes\employee\EmployeeSchedule.cs" />
+    <Compile Include="Classes\InsuranceCompany.cs" />
+    <Compile Include="Classes\InsuranceContract.cs" />
+    <Compile Include="Classes\Laboratory.cs" />
+    <Compile Include="Classes\LaboratoryTest.cs" />
+    <Compile Include="Classes\MedicalComponent.cs" />
+    <Compile Include="Classes\MedicalProductDetails.cs" />
+    <Compile Include="Classes\PaymentMethod.cs" />
+    <Compile Include="Classes\PaymentStatus.cs" />
+    <Compile Include="Classes\Permission.cs" />
+    <Compile Include="Classes\Pharmacyy.cs" />
+    <Compile Include="Classes\ProductPromotion.cs" />
+    <Compile Include="Classes\Products.cs" />
+    <Compile Include="Classes\Purchase.cs" />
+    <Compile Include="Classes\PurchaseReturn.cs" />
+    <Compile Include="Classes\Role.cs" />
+    <Compile Include="Classes\Sales.cs" />
+    <Compile Include="Classes\SalesReceipt.cs" />
+    <Compile Include="Classes\SalesReturn.cs" />
+    <Compile Include="Classes\Screen.cs" />
+    <Compile Include="Classes\StockTransfer.cs" />
+    <Compile Include="Classes\Supplier.cs" />
+    <Compile Include="Classes\UnitOfMeasurement.cs" />
+    <Compile Include="Classes\usefullclasses\ComboBoxItem.cs" />
+    <Compile Include="Classes\usefullclasses\ConnectionString.cs" />
+    <Compile Include="Classes\usefullclasses\LoggedUser.cs" />
+    <Compile Include="Classes\UsersPasswords.cs" />
+    <Compile Include="Classes\Warehouse.cs" />
+    <Compile Include="Forms\frmLaboratoryTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLaboratoryTest.Designer.cs">
+      <DependentUpon>frmLaboratoryTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmWarehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmWarehouse.Designer.cs">
+      <DependentUpon>frmWarehouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCurrency.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCurrency.Designer.cs">
+      <DependentUpon>frmCurrency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPaymentStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPaymentStatus.Designer.cs">
+      <DependentUpon>frmPaymentStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPaymentMethod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPaymentMethod.Designer.cs">
+      <DependentUpon>frmPaymentMethod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLaboratory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLaboratory.Designer.cs">
+      <DependentUpon>frmLaboratory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDoctors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmDoctors.Designer.cs">
+      <DependentUpon>frmDoctors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDoctorSpecialization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmDoctorSpecialization.Designer.cs">
+      <DependentUpon>frmDoctorSpecialization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBackground.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmClients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmClients.Designer.cs">
+      <DependentUpon>frmClients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCountry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCountry.Designer.cs">
+      <DependentUpon>frmCountry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMDI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMDI.Designer.cs">
+      <DependentUpon>frmMDI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPermissions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPermissions.Designer.cs">
+      <DependentUpon>frmPermissions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmRole.Designer.cs">
+      <DependentUpon>frmRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmScreens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmScreens.Designer.cs">
+      <DependentUpon>frmScreens.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmUsers.Designer.cs">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\frmClients.resx">
+      <DependentUpon>frmClients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCountry.resx">
+      <DependentUpon>frmCountry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCurrency.resx">
+      <DependentUpon>frmCurrency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDoctors.resx">
+      <DependentUpon>frmDoctors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDoctorSpecialization.resx">
+      <DependentUpon>frmDoctorSpecialization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLaboratory.resx">
+      <DependentUpon>frmLaboratory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMDI.resx">
+      <DependentUpon>frmMDI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPaymentMethod.resx">
+      <DependentUpon>frmPaymentMethod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPaymentStatus.resx">
+      <DependentUpon>frmPaymentStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPermissions.resx">
+      <DependentUpon>frmPermissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRole.resx">
+      <DependentUpon>frmRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmScreens.resx">
+      <DependentUpon>frmScreens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmUsers.resx">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmWarehouse.resx">
+      <DependentUpon>frmWarehouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Add.png" />
+    <Content Include="Resources\Client Tests.png" />
+    <Content Include="Resources\Clients.png" />
+    <Content Include="Resources\Delete.png" />
+    <Content Include="Resources\Exit.png" />
+    <Content Include="Resources\Insurance.png" />
+    <Content Include="Resources\Lock.png" />
+    <Content Include="Resources\Login.png" />
+    <Content Include="Resources\MedicalProducts.png" />
+    <Content Include="Resources\Pharmacy.png" />
+    <Content Include="Resources\Icon.ico" />
+    <Content Include="Resources\ProductPromotion.png" />
+    <Content Include="Resources\Products.png" />
+    <Content Include="Resources\Purchase.png" />
+    <Content Include="Resources\PurchaseReturn.png" />
+    <Content Include="Resources\Refresh.png" />
+    <Content Include="Resources\Sales Receipt.png" />
+    <Content Include="Resources\Sales.png" />
+    <Content Include="Resources\SalesReturn.png" />
+    <Content Include="Resources\Update.png" />
+    <Content Include="Resources\User.png" />
+    <Content Include="Resources\Users.png" />
+    <Content Include="Resources\Warehouse.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
