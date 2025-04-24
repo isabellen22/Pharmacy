@@ -1,83 +1,92 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Pharmacy.Classes.UsefullClasses;
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows.Forms;
 
-namespace Pharmacy0.Classes
+namespace Pharmacy.Classes
 {
-    internal class SalesReturn
+    public class SalesReturn
     {
-        private int SalesReturnID { get; set; }
-        private DateTime ReturnDate { get; set; }
-        private int CurrencyID { get; set; }
-        private decimal Amount { get; set; }
-        private List<SalesReturnDetail> SalesReturnDetails { get; set; }
+        public int SalesReturnID { get; set; }
+        public int SalesID { get; set; }
+        public DateTime ReturnDate { get; set; }
+        public string ReturnReason { get; set; }
+        public int CurrencyID { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Discount { get; set; }
+        public decimal VAT { get; set; }
+        public int PaymentMethodID { get; set; }
+        public int SReturnedProduct { get; set; }
+        public decimal SReturnedQuantity { get; set; }
+        public decimal SReturnedPrice { get; set; }
+        public decimal SReturnDiscount { get; set; }
+        public decimal SReturnVAT { get; set; }
 
-        // Constructor
-        public SalesReturn(int salesReturnID, DateTime returnDate, int currencyID, decimal amount)
+        public SalesReturn(int salesID, DateTime returnDate, string returnReason,
+                           int currencyID, decimal amount, decimal discount, decimal vat,
+                           int paymentMethodID, int sReturnedProduct, decimal sReturnedQuantity,
+                           decimal sReturnedPrice, decimal sReturnDiscount, decimal sReturnVAT)
         {
-            SalesReturnID = salesReturnID;
+            SalesID = salesID;
             ReturnDate = returnDate;
+            ReturnReason = returnReason;
             CurrencyID = currencyID;
             Amount = amount;
-            SalesReturnDetails = new List<SalesReturnDetail>(); // Initialize the list of details
+            Discount = discount;
+            VAT = vat;
+            PaymentMethodID = paymentMethodID;
+            SReturnedProduct = sReturnedProduct;
+            SReturnedQuantity = sReturnedQuantity;
+            SReturnedPrice = sReturnedPrice;
+            SReturnDiscount = sReturnDiscount;
+            SReturnVAT = sReturnVAT;
         }
 
-        // Method to add details to the return
-        public void AddSalesReturnDetail(int productID, decimal returnedQuantity, decimal returnedPrice)
+        public int INSERT(DataTable tSales)
         {
-            SalesReturnDetails.Add(new SalesReturnDetail(productID, returnedQuantity, returnedPrice));
-        }
-
-        // INSERT method for inserting the SalesReturn and its details into the database
-        public void INSERT()
-        {
-            // Code to insert SalesReturn into the database
-            // For example: Insert SalesReturn record first
-
-            // Then insert each SalesReturnDetail into the database as well
-            foreach (var detail in SalesReturnDetails)
+            try
             {
-                // Insert each detail into the database
+                using (SqlConnection con = new SqlConnection(ConnectionString.Value))
+                {
+                    using (SqlCommand cmd = new SqlCommand("prcSalesReturn", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        SqlParameter outputIdParam = new SqlParameter("@SalesReturnID", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+
+                        cmd.Parameters.AddWithValue("@Operation", "INSERT");
+                        cmd.Parameters.Add(outputIdParam);
+                        cmd.Parameters.AddWithValue("@SalesID", SalesID);
+                        cmd.Parameters.AddWithValue("@ReturnDate", ReturnDate);
+                        cmd.Parameters.AddWithValue("@ReturnReason", ReturnReason);
+                        cmd.Parameters.AddWithValue("@CurrencyID", CurrencyID);
+                        cmd.Parameters.AddWithValue("@Amount", Amount);
+                        cmd.Parameters.AddWithValue("@Discount", Discount);
+                        cmd.Parameters.AddWithValue("@VAT", VAT);
+                        cmd.Parameters.AddWithValue("@PaymentMethodID", PaymentMethodID);
+                        cmd.Parameters.AddWithValue("@User", LoggedUser.UserID);
+
+                        SqlParameter tvpParam = cmd.Parameters.AddWithValue("@tSales", tSales);
+                        tvpParam.SqlDbType = SqlDbType.Structured;
+                        tvpParam.TypeName = "dbo.tSales"; // Updated table type name
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+
+                        this.SalesReturnID = (int)outputIdParam.Value;
+                        return this.SalesReturnID;
+                    }
+                }
             }
-        }
-
-        // UPDATE method to update SalesReturn and its details in the database
-        public void UPDATE()
-        {
-            // Code to update the SalesReturn record
-            // Then update the details as needed
-        }
-
-        // DELETE method to delete the SalesReturn and its details
-        public void DELETE()
-        {
-            // Code to delete the SalesReturn record
-            // Also delete associated details
-        }
-
-        // SELECT method to retrieve SalesReturn and its details from the database
-        public void SELECT()
-        {
-            // Code to select the SalesReturn record
-            // Then retrieve all related SalesReturnDetails
-        }
-    }
-
-    // SalesReturnDetail class that holds information about the returned product
-    internal class SalesReturnDetail
-    {
-        public int ProductID { get; set; }
-        public decimal ReturnedQuantity { get; set; }
-        public decimal ReturnedPrice { get; set; }
-
-        // Constructor for SalesReturnDetail
-        public SalesReturnDetail(int productID, decimal returnedQuantity, decimal returnedPrice)
-        {
-            ProductID = productID;
-            ReturnedQuantity = returnedQuantity;
-            ReturnedPrice = returnedPrice;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during Sales Return INSERT: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
+            }
         }
     }
 }

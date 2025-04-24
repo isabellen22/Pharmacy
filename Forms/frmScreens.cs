@@ -120,6 +120,7 @@ namespace Pharmacy.Forms
             txtScreenURL.Clear();
             btnDelete.Enabled = false;
             btnUpdate.Enabled = false;
+            btnAdd.Enabled = true;
 
 
             isScreenSelectedByDoubleClick = false;
@@ -152,6 +153,7 @@ namespace Pharmacy.Forms
             txtScreenURL.Clear();
             btnDelete.Enabled = false;
             btnUpdate.Enabled = false;
+            btnAdd.Enabled = true;
             isScreenSelectedByDoubleClick = false;
 
         }
@@ -166,6 +168,7 @@ namespace Pharmacy.Forms
 
             btnDelete.Enabled = false;
             btnUpdate.Enabled = false;
+            btnAdd.Enabled = true;
 
             isScreenSelectedByDoubleClick = false;
             enablefiltering = true;

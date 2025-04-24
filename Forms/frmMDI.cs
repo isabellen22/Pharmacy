@@ -151,23 +151,7 @@ namespace Pharmacy.Forms
             mainForm.Show();
         }
 
-        private void laboratoryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            foreach (Form child in this.MdiChildren)
-            {
-                if (child is Forms.frmLaboratory)
-                {
-                    child.BringToFront();
-                    child.Focus();
-                    child.Refresh();
-                    return;
-                }
-            }
-
-            Forms.frmLaboratory mainForm = new Forms.frmLaboratory();
-            mainForm.MdiParent = this;
-            mainForm.Show();
-        }
+   
 
         private void payementMethodsToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
@@ -243,17 +227,115 @@ namespace Pharmacy.Forms
             mainForm.Show();
         }
 
+        private void btnProducts_Click(object sender, EventArgs e)
+        {
+            foreach (Form child in this.MdiChildren)
+            {
+                if (child is Forms.frmProduct)
+                {
+                    child.BringToFront();
+                    child.Focus();
+                    child.Refresh();
+                    return;
+                }
+            }
 
+            Forms.frmProduct mainForm = new Forms.frmProduct();
+            mainForm.MdiParent = this;
+            mainForm.Dock = DockStyle.Fill;
+            mainForm.Show();
+        }
 
+        private void btnLaboratoryTests_Click(object sender, EventArgs e)
+        {
+            foreach (Form child in this.MdiChildren)
+            {
+                if (child is Forms.frmLaboratoryTest)
+                {
+                    child.BringToFront();
+                    child.Focus();
+                    child.Refresh();
+                    return;
+                }
+            }
 
+            Forms.frmLaboratoryTest mainForm = new Forms.frmLaboratoryTest();
+            mainForm.MdiParent = this;
+            mainForm.Show();
+        }
 
+        private void suppliersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Form child in this.MdiChildren)
+            {
+                if (child is Forms.frmSupplier)
+                {
+                    child.BringToFront();
+                    child.Focus();
+                    child.Refresh();
+                    return;
+                }
+            }
 
+            Forms.frmSupplier mainForm = new Forms.frmSupplier();
+            mainForm.MdiParent = this;
+            mainForm.Show();
+        }
 
+        private void unitsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Form child in this.MdiChildren)
+            {
+                if (child is Forms.frmUnitOfMeasurement)
+                {
+                    child.BringToFront();
+                    child.Focus();
+                    child.Refresh();
+                    return;
+                }
+            }
 
+            Forms.frmUnitOfMeasurement mainForm = new Forms.frmUnitOfMeasurement();
+            mainForm.MdiParent = this;
+            mainForm.Show();
+        }
 
+        private void btnPurchase_Click(object sender, EventArgs e)
+        {
+            foreach (Form child in this.MdiChildren)
+            {
+                if (child is Forms.frmPurchase)
+                {
+                    child.BringToFront();
+                    child.Focus();
+                    child.Refresh();
+                    return;
+                }
+            }
 
+            Forms.frmPurchase mainForm = new Forms.frmPurchase();
+            mainForm.MdiParent = this;
+            mainForm.Dock = DockStyle.Fill;
+            mainForm.Show();
+        }
 
+        private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Form child in this.MdiChildren)
+            {
+                if (child is Forms.frmEmployee)
+                {
+                    child.BringToFront();
+                    child.Focus();
+                    child.Refresh();
+                    return;
+                }
+            }
 
+            Forms.frmEmployee mainForm = new Forms.frmEmployee();
+            mainForm.MdiParent = this;
+            mainForm.Show();
+        }
 
 
 
@@ -432,13 +514,7 @@ namespace Pharmacy.Forms
             //employeeForm.Show();
         }
 
-        private void btnProducts_Click(object sender, EventArgs e)
-        {
-            //ProductForm productForm = new ProductForm();
-            //productForm.WindowState = FormWindowState.Maximized; // Maximize the form
-            //productForm.MdiParent = this;
-            //productForm.Show();
-        }
+        
 
         private void screensToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -533,7 +609,19 @@ namespace Pharmacy.Forms
            // pmForm.Show();//extra
         }
 
-       
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

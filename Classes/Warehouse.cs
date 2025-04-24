@@ -23,6 +23,10 @@ namespace Pharmacy.Classes
             User = user;
         }
 
+        public Warehouse()
+        {
+        }
+
         public DataTable INSERT()
         {
             return prcWarehouse("INSERT", this);

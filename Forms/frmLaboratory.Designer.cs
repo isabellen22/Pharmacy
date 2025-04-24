@@ -285,6 +285,7 @@ namespace Pharmacy.Forms
 
         private DataGridViewTextBoxColumn LabName;
         private DataGridViewTextBoxColumn LabLocation;
+        private DataGridViewTextBoxColumn LabContactNB;
         private DataGridViewTextBoxColumn LabContact;
         private DataGridViewTextBoxColumn LabEmail;
         private DataGridViewTextBoxColumn LaboratoryID;

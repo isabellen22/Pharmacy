@@ -1,127 +1,117 @@
-﻿using Pharmacy.Classes;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows.Forms;
+using Pharmacy.Classes;
+using Pharmacy.Classes.UsefullClasses;
 
 namespace Pharmacy.Forms
 {
     public partial class frmLaboratoryTest : Form
     {
-        private int selectedID = 0;
+        private int selectedTestID = -1;
 
         public frmLaboratoryTest()
         {
             InitializeComponent();
-            dgvTests.AutoGenerateColumns = false;
-            btnUpdate.Enabled = false;
-            btnDelete.Enabled = false;
+            dgvLabTests.AutoGenerateColumns = false;
         }
 
         private void frmLaboratoryTest_Load(object sender, EventArgs e)
         {
-            LoadData();
+            LoadUnits();
+            LoadLabTests(); // or whatever your main data loading method is
+            ClearInputs();
         }
 
-        private void LoadData()
+        
+        private void LoadUnits()
         {
-            LaboratoryTest test = new LaboratoryTest(0, "", "", 0, 0, 0, 0);
-            dgvTests.DataSource = test.SELECT();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConnectionString.Value))
+                {
+                    using (SqlCommand cmd = new SqlCommand("SELECT UnitID, UnitName FROM tblUnitOfMeasurement ORDER BY UnitName", con))
+                    {
+                        SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        sda.Fill(dt);
+
+                        cmbUnit.DataSource = dt;
+                        cmbUnit.DisplayMember = "UnitName";
+                        cmbUnit.ValueMember = "UnitID";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading units: " + ex.Message);
+            }
+        }
+
+        private void LoadLabTests()
+        {
+            try
+            {
+                // Step 1: Load lab tests and units
+                DataTable labTests = new LaboratoryTest(0, "", "", 0, 0, 0, 0).SELECT();
+                DataTable units = new UnitOfMeasurement().SELECT();
+
+                // Step 2: Add UnitName column to labTests
+                if (!labTests.Columns.Contains("UnitName"))
+                    labTests.Columns.Add("UnitName", typeof(string));
+
+                foreach (DataRow row in labTests.Rows)
+                {
+                    var matchingUnit = units.Rows
+                        .Cast<DataRow>()
+                        .FirstOrDefault(u => Convert.ToInt32(u["UnitID"]) == Convert.ToInt32(row["UnitID"]));
+
+                    row["UnitName"] = matchingUnit != null ? matchingUnit["UnitName"].ToString() : "";
+                }
+
+                // Step 3: Bind to grid
+                dgvLabTests.DataSource = labTests;
+
+                // Step 4: Optional formatting
+                dgvLabTests.Columns["LabTestPrice"].DefaultCellStyle.Format = "N2";
+                dgvLabTests.Columns["MinHealthyRange"].DefaultCellStyle.Format = "N2";
+                dgvLabTests.Columns["MaxHealthyRange"].DefaultCellStyle.Format = "N2";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading lab tests: " + ex.Message);
+            }
         }
 
         private void ClearInputs()
         {
             txtName.Clear();
-            txtDesc.Clear();
+            txtDescription.Clear();
             txtPrice.Clear();
-            txtMin.Clear();
-            txtMax.Clear();
-            txtUnit.Clear();
+            txtMinRange.Clear();
+            txtMaxRange.Clear();
+            cmbUnit.SelectedIndex = -1;
 
-            selectedID = 0;
             btnAdd.Enabled = true;
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
+            selectedTestID = -1;
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
+        private void dgvLabTests_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            ClearInputs();
-            LoadData();
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            if (!ValidateInputs()) return;
-
-            LaboratoryTest test = new LaboratoryTest(
-                0,
-                txtName.Text.Trim(),
-                txtDesc.Text.Trim(),
-                decimal.Parse(txtPrice.Text),
-                decimal.Parse(txtMin.Text),
-                decimal.Parse(txtMax.Text),
-                int.Parse(txtUnit.Text)
-            );
-
-            test.INSERT();
-            LoadData();
-            ClearInputs();
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (selectedID == 0) return;
-
-            try
+            if (e.RowIndex >= 0)
             {
-                LaboratoryTest test = new LaboratoryTest(selectedID, "", "", 0, 0, 0, 0);
-                test.DELETE();
-                LoadData();
-                ClearInputs();
-            }
-            catch (SqlException ex) when (ex.Number == 547)
-            {
-                MessageBox.Show("This test is currently in use and cannot be deleted.", "Delete Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error deleting: " + ex.Message);
-            }
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            if (selectedID == 0 || !ValidateInputs()) return;
-
-            LaboratoryTest test = new LaboratoryTest(
-                selectedID,
-                txtName.Text.Trim(),
-                txtDesc.Text.Trim(),
-                decimal.Parse(txtPrice.Text),
-                decimal.Parse(txtMin.Text),
-                decimal.Parse(txtMax.Text),
-                int.Parse(txtUnit.Text)
-            );
-
-            test.UPDATE();
-            LoadData();
-            ClearInputs();
-        }
-
-        private void dgvTests_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && dgvTests.Rows[e.RowIndex].Cells["LabTestID"].Value != null)
-            {
-                DataGridViewRow row = dgvTests.Rows[e.RowIndex];
-
-                selectedID = Convert.ToInt32(row.Cells["LabTestID"].Value);
-                txtName.Text = row.Cells["LabTestName"].Value?.ToString();
-                txtDesc.Text = row.Cells["LabTestDescription"].Value?.ToString();
-                txtPrice.Text = row.Cells["LabTestPrice"].Value?.ToString();
-                txtMin.Text = row.Cells["MinHealthyRange"].Value?.ToString();
-                txtMax.Text = row.Cells["MaxHealthyRange"].Value?.ToString();
-                txtUnit.Text = row.Cells["UnitID"].Value?.ToString();
+                DataGridViewRow row = dgvLabTests.Rows[e.RowIndex];
+                selectedTestID = Convert.ToInt32(row.Cells["LabTestID"].Value);
+                txtName.Text = row.Cells["LabTestName"].Value.ToString();
+                txtDescription.Text = row.Cells["LabTestDescription"].Value.ToString();
+                txtPrice.Text = row.Cells["LabTestPrice"].Value.ToString();
+                txtMinRange.Text = row.Cells["MinHealthyRange"].Value.ToString();
+                txtMaxRange.Text = row.Cells["MaxHealthyRange"].Value.ToString();
+                cmbUnit.SelectedValue = Convert.ToInt32(row.Cells["UnitID"].Value);
 
                 btnAdd.Enabled = false;
                 btnUpdate.Enabled = true;
@@ -129,33 +119,111 @@ namespace Pharmacy.Forms
             }
         }
 
-        private bool ValidateInputs()
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtName.Text) ||
-                string.IsNullOrWhiteSpace(txtPrice.Text) ||
-                string.IsNullOrWhiteSpace(txtMin.Text) ||
-                string.IsNullOrWhiteSpace(txtMax.Text) ||
-                string.IsNullOrWhiteSpace(txtUnit.Text))
+            try
             {
-                MessageBox.Show("All fields are required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
+                if (!decimal.TryParse(txtPrice.Text, out decimal price) ||
+                    !decimal.TryParse(txtMinRange.Text, out decimal minRange) ||
+                    !decimal.TryParse(txtMaxRange.Text, out decimal maxRange))
+                {
+                    MessageBox.Show("Please enter valid numeric values for price and ranges.");
+                    return;
+                }
 
-            if (!decimal.TryParse(txtPrice.Text, out _) ||
-                !decimal.TryParse(txtMin.Text, out _) ||
-                !decimal.TryParse(txtMax.Text, out _) ||
-                !int.TryParse(txtUnit.Text, out _))
+                if (cmbUnit.SelectedValue == null)
+                {
+                    MessageBox.Show("Please select a unit.");
+                    return;
+                }
+
+                var test = new LaboratoryTest(
+                    0,
+                    txtName.Text.Trim(),
+                    txtDescription.Text.Trim(),
+                    price,
+                    minRange,
+                    maxRange,
+                    Convert.ToInt32(cmbUnit.SelectedValue)
+                );
+
+                test.INSERT();
+               
+                LoadLabTests();
+                ClearInputs();
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Invalid numeric values detected.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
+                MessageBox.Show("Error adding lab test: " + ex.Message);
             }
-
-            return true;
         }
 
-        private void frmLaboratoryTest_FormClosed(object sender, FormClosedEventArgs e)
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            if (selectedTestID == -1)
+            {
+                MessageBox.Show("No test selected.");
+                return;
+            }
+
+            try
+            {
+                LaboratoryTest test = new LaboratoryTest(
+                    selectedTestID,
+                    txtName.Text.Trim(),
+                    txtDescription.Text.Trim(),
+                    decimal.Parse(txtPrice.Text),
+                    decimal.Parse(txtMinRange.Text),
+                    decimal.Parse(txtMaxRange.Text),
+                    Convert.ToInt32(cmbUnit.SelectedValue)
+                );
+
+                test.UPDATE();
+                
+                LoadLabTests();
+                ClearInputs();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating lab test: " + ex.Message);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (selectedTestID == -1)
+            {
+                MessageBox.Show("No test selected.");
+                return;
+            }
+
+            try
+            {
+                LaboratoryTest test = new LaboratoryTest();
+                test.LabTestID = selectedTestID;
+                test.DELETE();
+               
+                LoadLabTests();
+                ClearInputs();
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("FK_"))
+                    MessageBox.Show("Cannot delete: linked to other records.");
+                else
+                    MessageBox.Show("Error deleting lab test: " + ex.Message);
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadLabTests();
+            ClearInputs();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

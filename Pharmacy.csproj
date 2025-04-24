@@ -46,8 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CalendarColumn.cs" />
     <Compile Include="Classes\ChemicalComponent.cs" />
-    <Compile Include="Classes\Class1.cs" />
+    <Compile Include="Classes\Employee.cs" />
+    <Compile Include="Classes\ProductDetails.cs" />
     <Compile Include="Classes\Client.cs" />
     <Compile Include="Classes\ClientsTests.cs" />
     <Compile Include="Classes\ConversionUnit.cs" />
@@ -55,12 +57,6 @@
     <Compile Include="Classes\Currency.cs" />
     <Compile Include="Classes\Doctor.cs" />
     <Compile Include="Classes\DoctorsSpecialization.cs" />
-    <Compile Include="Classes\employee\Employee.cs" />
-    <Compile Include="Classes\employee\EmployeeContract.cs" />
-    <Compile Include="Classes\employee\EmployeePromotion.cs" />
-    <Compile Include="Classes\employee\EmployeeSalary.cs" />
-    <Compile Include="Classes\employee\EmployeeSalaryHistory.cs" />
-    <Compile Include="Classes\employee\EmployeeSchedule.cs" />
     <Compile Include="Classes\InsuranceCompany.cs" />
     <Compile Include="Classes\InsuranceContract.cs" />
     <Compile Include="Classes\Laboratory.cs" />
@@ -88,6 +84,36 @@
     <Compile Include="Classes\usefullclasses\LoggedUser.cs" />
     <Compile Include="Classes\UsersPasswords.cs" />
     <Compile Include="Classes\Warehouse.cs" />
+    <Compile Include="Forms\frmEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmEmployee.Designer.cs">
+      <DependentUpon>frmEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmUnitOfMeasurement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmUnitOfMeasurement.Designer.cs">
+      <DependentUpon>frmUnitOfMeasurement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSupplier.Designer.cs">
+      <DependentUpon>frmSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPurchase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPurchase.Designer.cs">
+      <DependentUpon>frmPurchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmProduct.Designer.cs">
+      <DependentUpon>frmProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmLaboratoryTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +213,7 @@
     <Compile Include="Forms\frmUsers.Designer.cs">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmClients.resx">
@@ -204,8 +231,14 @@
     <EmbeddedResource Include="Forms\frmDoctorSpecialization.resx">
       <DependentUpon>frmDoctorSpecialization.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmEmployee.resx">
+      <DependentUpon>frmEmployee.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLaboratory.resx">
       <DependentUpon>frmLaboratory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLaboratoryTest.resx">
+      <DependentUpon>frmLaboratoryTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
@@ -222,11 +255,23 @@
     <EmbeddedResource Include="Forms\frmPermissions.resx">
       <DependentUpon>frmPermissions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmProduct.resx">
+      <DependentUpon>frmProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPurchase.resx">
+      <DependentUpon>frmPurchase.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRole.resx">
       <DependentUpon>frmRole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmScreens.resx">
       <DependentUpon>frmScreens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSupplier.resx">
+      <DependentUpon>frmSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmUnitOfMeasurement.resx">
+      <DependentUpon>frmUnitOfMeasurement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmUsers.resx">
       <DependentUpon>frmUsers.cs</DependentUpon>
@@ -244,6 +289,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="bin\Debug\Pharmacy.exe.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -258,6 +304,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
+    <Content Include="bin\Debug\Pharmacy.exe" />
+    <Content Include="bin\Debug\Pharmacy.pdb" />
     <Content Include="Resources\Add.png" />
     <Content Include="Resources\Client Tests.png" />
     <Content Include="Resources\Clients.png" />
@@ -281,6 +331,9 @@
     <Content Include="Resources\User.png" />
     <Content Include="Resources\Users.png" />
     <Content Include="Resources\Warehouse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

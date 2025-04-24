@@ -27,6 +27,10 @@ namespace Pharmacy.Classes
             UnitID = unitID;
         }
 
+        public LaboratoryTest()
+        {
+        }
+
         public DataTable INSERT()
         {
            return prcLaboratoryTest("INSERT", this);
@@ -39,7 +43,9 @@ namespace Pharmacy.Classes
 
         public DataTable DELETE()
         {
-            return prcLaboratoryTest("DELETE", this);
+            return prcLaboratoryTest("DELETE", new LaboratoryTest(
+                LabTestID, "", "", 0, 0, 0, 0  // empty/zero defaults
+            ));
         }
 
         public DataTable SELECT()

@@ -43,6 +43,10 @@ namespace Pharmacy.Classes
             this.now = now;
         }
 
+        public Currency()
+        {
+        }
+
         public override string ToString()
         {
             return CurrencyName; 

@@ -36,13 +36,15 @@
             this.laboratoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supplierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.suppliersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.countriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.payementMethodsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.payementStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.employeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.employeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.screensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.permissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,9 +75,6 @@
             this.menuStripMDI.BackColor = System.Drawing.Color.SteelBlue;
             this.menuStripMDI.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.menuStripMDI.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(178)))), ((int)(((byte)(187)))));
-           // this.menuStripMDI.ForeColor = System.Drawing.Color.FromArgb(245, 245, 245);
-
-
             this.menuStripMDI.GripMargin = new System.Windows.Forms.Padding(0);
             this.menuStripMDI.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStripMDI.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -128,21 +127,30 @@
             this.laboratoryToolStripMenuItem.Name = "laboratoryToolStripMenuItem";
             this.laboratoryToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
             this.laboratoryToolStripMenuItem.Text = "Laboratory";
-            this.laboratoryToolStripMenuItem.Click += new System.EventHandler(this.laboratoryToolStripMenuItem_Click);
             // 
             // testsToolStripMenuItem
             // 
             this.testsToolStripMenuItem.Name = "testsToolStripMenuItem";
             this.testsToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.testsToolStripMenuItem.Text = "Tests";
+            this.testsToolStripMenuItem.Text = "Laboratory Tests";
+            this.testsToolStripMenuItem.Click += new System.EventHandler(this.btnLaboratoryTests_Click);
             // 
             // supplierToolStripMenuItem
             // 
+            this.supplierToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.suppliersToolStripMenuItem});
             this.supplierToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.supplierToolStripMenuItem.Name = "supplierToolStripMenuItem";
             this.supplierToolStripMenuItem.Padding = new System.Windows.Forms.Padding(30, 5, 30, 5);
             this.supplierToolStripMenuItem.Size = new System.Drawing.Size(117, 29);
             this.supplierToolStripMenuItem.Text = "Supplier";
+            // 
+            // suppliersToolStripMenuItem
+            // 
+            this.suppliersToolStripMenuItem.Name = "suppliersToolStripMenuItem";
+            this.suppliersToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.suppliersToolStripMenuItem.Text = "Suppliers";
+            this.suppliersToolStripMenuItem.Click += new System.EventHandler(this.suppliersToolStripMenuItem_Click);
             // 
             // dataToolStripMenuItem
             // 
@@ -150,7 +158,8 @@
             this.currenciesToolStripMenuItem,
             this.countriesToolStripMenuItem,
             this.payementMethodsToolStripMenuItem,
-            this.payementStatusToolStripMenuItem});
+            this.payementStatusToolStripMenuItem,
+            this.unitsToolStripMenuItem});
             this.dataToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.dataToolStripMenuItem.Name = "dataToolStripMenuItem";
             this.dataToolStripMenuItem.Padding = new System.Windows.Forms.Padding(30, 5, 30, 5);
@@ -185,22 +194,29 @@
             this.payementStatusToolStripMenuItem.Text = "Payement status";
             this.payementStatusToolStripMenuItem.Click += new System.EventHandler(this.payementStatusToolStripMenuItem_Click);
             // 
+            // unitsToolStripMenuItem
+            // 
+            this.unitsToolStripMenuItem.Name = "unitsToolStripMenuItem";
+            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.unitsToolStripMenuItem.Text = "Units";
+            this.unitsToolStripMenuItem.Click += new System.EventHandler(this.unitsToolStripMenuItem_Click);
+            // 
             // employeeToolStripMenuItem
             // 
             this.employeeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.listEmployeeToolStripMenuItem});
+            this.employeesToolStripMenuItem});
             this.employeeToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.employeeToolStripMenuItem.Name = "employeeToolStripMenuItem";
             this.employeeToolStripMenuItem.Padding = new System.Windows.Forms.Padding(30, 5, 30, 5);
             this.employeeToolStripMenuItem.Size = new System.Drawing.Size(125, 29);
             this.employeeToolStripMenuItem.Text = "Employee";
             // 
-            // listEmployeeToolStripMenuItem
+            // employeesToolStripMenuItem
             // 
-            this.listEmployeeToolStripMenuItem.Name = "listEmployeeToolStripMenuItem";
-            this.listEmployeeToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-            this.listEmployeeToolStripMenuItem.Text = "List Employee";
-            this.listEmployeeToolStripMenuItem.Click += new System.EventHandler(this.listEmployeeToolStripMenuItem_Click);
+            this.employeesToolStripMenuItem.Name = "employeesToolStripMenuItem";
+            this.employeesToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.employeesToolStripMenuItem.Text = "Employees";
+            this.employeesToolStripMenuItem.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
             // 
             // usersToolStripMenuItem
             // 
@@ -359,6 +375,7 @@
             this.btnPurchase.Text = "Purchase";
             this.btnPurchase.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnPurchase.UseVisualStyleBackColor = false;
+            this.btnPurchase.Click += new System.EventHandler(this.btnPurchase_Click);
             // 
             // btnClients
             // 
@@ -404,7 +421,7 @@
             this.btnInsurance.FlatAppearance.BorderSize = 0;
             this.btnInsurance.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInsurance.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold);
-            this.btnInsurance.ForeColor = System.Drawing.Color.FromArgb(245, 245, 245);
+            this.btnInsurance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
             this.btnInsurance.Image = global::Pharmacy.Properties.Resources.Insurance;
             this.btnInsurance.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnInsurance.Location = new System.Drawing.Point(0, 503);
@@ -424,8 +441,7 @@
             this.btnPurchaseReturn.FlatAppearance.BorderSize = 0;
             this.btnPurchaseReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPurchaseReturn.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold);
-            this.btnPurchaseReturn.ForeColor = System.Drawing.Color.FromArgb(245, 245, 245);
-
+            this.btnPurchaseReturn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
             this.btnPurchaseReturn.Image = global::Pharmacy.Properties.Resources.PurchaseReturn;
             this.btnPurchaseReturn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnPurchaseReturn.Location = new System.Drawing.Point(0, 170);
@@ -444,8 +460,7 @@
             this.btnSalesReceipt.FlatAppearance.BorderSize = 0;
             this.btnSalesReceipt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalesReceipt.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold);
-            this.btnSalesReceipt.ForeColor = System.Drawing.Color.FromArgb(245, 245, 245);
-
+            this.btnSalesReceipt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
             this.btnSalesReceipt.Image = global::Pharmacy.Properties.Resources.Sales_Receipt;
             this.btnSalesReceipt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnSalesReceipt.Location = new System.Drawing.Point(0, 88);
@@ -466,8 +481,7 @@
             this.btnClientsTests.FlatAppearance.BorderSize = 0;
             this.btnClientsTests.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClientsTests.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold);
-            this.btnClientsTests.ForeColor = System.Drawing.Color.FromArgb(245, 245, 245);
-
+            this.btnClientsTests.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
             this.btnClientsTests.Image = global::Pharmacy.Properties.Resources.Client_Tests;
             this.btnClientsTests.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnClientsTests.Location = new System.Drawing.Point(0, 420);
@@ -486,8 +500,7 @@
             this.btnSalesReturn.FlatAppearance.BorderSize = 0;
             this.btnSalesReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalesReturn.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold);
-            this.btnSalesReturn.ForeColor = System.Drawing.Color.FromArgb(245, 245, 245);
-
+            this.btnSalesReturn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
             this.btnSalesReturn.Image = global::Pharmacy.Properties.Resources.SalesReturn;
             this.btnSalesReturn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnSalesReturn.Location = new System.Drawing.Point(0, 253);
@@ -505,6 +518,7 @@
             this.btnProductPromotion.BackColor = System.Drawing.Color.Transparent;
             this.btnProductPromotion.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnProductPromotion.FlatAppearance.BorderSize = 0;
+            this.btnProductPromotion.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnProductPromotion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProductPromotion.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold);
             this.btnProductPromotion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
@@ -527,8 +541,7 @@
             this.btnMedicalProducts.FlatAppearance.BorderSize = 0;
             this.btnMedicalProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMedicalProducts.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Bold);
-            this.btnMedicalProducts.ForeColor = System.Drawing.Color.FromArgb(245, 245, 245);
-
+            this.btnMedicalProducts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
             this.btnMedicalProducts.Image = global::Pharmacy.Properties.Resources.MedicalProducts;
             this.btnMedicalProducts.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnMedicalProducts.Location = new System.Drawing.Point(0, 337);
@@ -603,7 +616,9 @@
         private System.Windows.Forms.ToolStripMenuItem screensToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem permissionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem roleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem listEmployeeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem doctorSpecializationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem suppliersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem unitsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem employeesToolStripMenuItem;
     }
 }

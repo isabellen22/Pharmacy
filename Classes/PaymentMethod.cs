@@ -19,6 +19,10 @@ namespace Pharmacy.Classes
             PMDescription = pmDescription;
         }
 
+        public PaymentMethod()
+        {
+        }
+
         public DataTable INSERT()
         {
            return prcPaymentMethod("INSERT", this);
